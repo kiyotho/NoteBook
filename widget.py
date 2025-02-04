@@ -2,7 +2,7 @@
 from PySide6.QtWidgets import QWidget, QMainWindow, QMessageBox, QToolBar, QTextEdit,  QStatusBar, QFileDialog, QDialog
 from PySide6.QtCore import  Qt, QTimer
 from PySide6.QtGui import QAction, QIcon, QPixmap, QFont, QColor
-from setting import Setting
+from settings import Setting
 import os
 
 
