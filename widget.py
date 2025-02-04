@@ -1,8 +1,12 @@
 #importing essential ibraries
 from PySide6.QtWidgets import QWidget, QMainWindow, QMessageBox, QToolBar, QTextEdit,  QStatusBar, QFileDialog, QDialog
 from PySide6.QtCore import  Qt, QTimer
-from PySide6.QtGui import QAction, QIcon, QPixmap
-from settings import Setting
+from PySide6.QtGui import QAction, QIcon, QPixmap, QFont, QColor
+from copy_of_setting import Setting
+import os
+
+
+
 #making a window class for the notebook app
 class NoteBook(QMainWindow):
     def __init__(self, app):
@@ -18,9 +22,16 @@ class NoteBook(QMainWindow):
         self.setGeometry(350, 150, 800, 600) #seting the aspect ratio of the wndow 
         self.setMinimumHeight(200)
         self.setMinimumWidth(300)
-        icon = QPixmap("images/NoteBook.png").scaled(200, 200, Qt.KeepAspectRatio, Qt.SmoothTransformation)
+        file_path = os.path.join("images", "NoteBook.png")
+        icon = QPixmap(file_path).scaled(200, 200, Qt.KeepAspectRatio, Qt.SmoothTransformation)
         self.setWindowIcon(icon)
         
+
+
+
+        # setting up icon path variable for seemless icon display after connvertion to exectuable
+        open_icon_path = file_path = os.path.join("images", "Open_icon.png")
+
         #setting up menu bar
         menu_bar = self.menuBar()
 
@@ -34,7 +45,7 @@ class NoteBook(QMainWindow):
 
 
         # making necessary action for this menu 
-        open_action = QAction(QIcon('images/Open_icon.png'), 'Open', self)
+        open_action = QAction(QIcon(open_icon_path), 'Open', self)
         save_action = QAction(QIcon('images/Save_icon.png'), "Save", self)
         save_as_action = QAction(QIcon('images/Save_as_icon.png'), 'Save as', self)
         exit_action = QAction(QIcon('images/Exit_icon.png'), 'Exit', self)
@@ -119,8 +130,13 @@ class NoteBook(QMainWindow):
 
         #making a text space
         self.text_area = QTextEdit(self)
+        self.text_area.setTextColor(QColor(50, 100, 250))
+        
+        # Set the font to Arial with a size of 12
+        font = QFont("Consolas", 11)
 
-
+        # use this font in the text_area
+        self.text_area.setFont(font)
 
         #adding the text area to the window 
         self.setCentralWidget(self.text_area)
